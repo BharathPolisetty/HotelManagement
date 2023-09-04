@@ -1,0 +1,19 @@
+{% include 'head.html'%}
+<br>
+
+<div class="row mt-5">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 mt-4">
+        <form action="addHouseKeeping1" method="post">
+            <input type="hidden" name="room_id" value="{{room_id}}">
+            <div class="card p-3 mt-3">
+                <div class="text-center h5">House Room Keeping</div>
+                <div class="form-group mt-1">
+                    <label for="work">Work</label>
+                    <input type="text" name="work" id="work" class="form-control mt-1 p-3" placeholder="Enter Work" required>
+                </div>
+                <input type="submit" value="Add" class="btn mt-3 text-white" style="background-color:#1E90FF">
+            </div>
+        </form>
+    </div>
+</div>

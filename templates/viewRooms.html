@@ -1,0 +1,119 @@
+{% include 'head.html'%}
+<br>
+<div class="container">
+    <form action="viewRooms">
+        <div class="row p-2">
+            <div class="col-md-3">
+                <label>Search Room</label>
+                    <select name="room_type_id" id="room_type_id" class="form-control mt-1"  onchange="this.form.submit()">
+                        <option value="all">All</option>
+                         {% for room_type in  room_types: %}
+                        <option value="{{room_type['_id']}}"
+                                {% if str(room_type_id) == str(room_type['_id']) :  %}
+                                selected
+                                {% endif%}
+                        >{{room_type['room_type']}}</option>
+                        {% endfor %}
+                    </select>
+            </div>
+            <div class="col-md-3">
+                <label>From Time</label>
+                <input type="date" name="check_in" id="check_in" value="{{check_in}}" class="form-control">
+            </div>
+            <div class="col-md-3">
+                  <label>To Time</label>
+                 <input type="date" name="check_out" id="check_out" value="{{check_out}}" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <input type="submit" value="search" class="btn btn-primary w-100 mt-4">
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container mt-3">
+    <div class="row">
+        {% for room in rooms%}
+        {% set room_type = get_room_type_by_id(room['room_type_id'])%}
+        <div class="col-md-4 mt-2">
+            <div class="card p-3 mt-3">
+                <div class="text-center h4">R No: {{room['room_number']}}</div>
+                <img src="static/Room/{{room['picture']}}" class="img-thumbnail" style="height:200px;width:100%;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="text-muted" style="font-size:12px">Room Name</div>
+                          <div class="h6">{{room['room_name']}}</div>
+                    </div>
+                     <div class="col-md-6">
+                           <div class="text-muted" style="font-size:12px">Room Type</div>
+                          <div class="h6" style="font-size:12px">{{room_type['room_type']}}</div>
+                     </div>
+                       <div class="col-md-6">
+                           <div class="text-muted" style="font-size:12px">Price PerDay</div>
+                          <div class="h6" style="font-size:13px">$ {{room['price_per_day']}}</div>
+                     </div>
+                    <div class="col-md-6">
+
+                     </div>
+
+                    {% if session['role'] =='employee'%}
+                     <div class="col-md-6">
+                          <form action="addHouseKeeping" method="post">
+                              <input type="hidden" name="room_id" value="{{room['_id']}}">
+                              <input type="submit" value="Add House Room Keeping" class="btn btn-success mb-2" style="font-size:10px">
+                          </form>
+                     </div>
+                     <div class="col-md-6">
+                          <form action="viewHouseKeeping" method="post">
+                              <input type="hidden" name="room_id" value="{{room['_id']}}">
+                              <input type="submit" value="View House Room Keeping" class="btn btn-primary mb-2" style="font-size:10px">
+                          </form>
+                     </div>
+                    {% endif%}
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        {% if session['role'] =='admin'%}
+                        <div class="col-md-6">
+                            <form action="viewCustomerBookings">
+                                <input type="hidden" name="room_id" value="{{room['_id']}}">
+                                <input type="submit" value="View Bookings" class="btn btn-primary w-100">
+                            </form>
+                        </div>
+                        {% endif%}
+                        {% if session['role'] =='customer'%}
+                        <div class="col-md-6">
+                            <form action="bookRoom1" method="post">
+                                <input type="hidden" name="room_id" value="{{room['_id']}}">
+                                <input type="hidden" name="check_in" value="{{check_in}}">
+                                <input type="hidden" name="check_out" value="{{check_out}}">
+                                <input type="submit" value="Book Room" class="btn btn-primary w-100">
+                            </form>
+                        </div>
+                        {% endif%}
+                        <div class="row">
+                        {% if session['role'] =='employee'%}
+                          <div class="col-md-6">
+                            <form action="bookRoom1" method="post">
+                                <input type="hidden" name="room_id" value="{{room['_id']}}">
+                                <input type="hidden" name="check_in" value="{{check_in}}">
+                                <input type="hidden" name="check_out" value="{{check_out}}">
+                                <input type="submit" value="Book Room" class="btn btn-primary w-100">
+                            </form>
+                        </div>
+                            <div class="col-md-6">
+                            <form action="viewCustomerBookings">
+                                <input type="hidden" name="room_id" value="{{room['_id']}}">
+                                <input type="submit" value="View Bookings" class="btn btn-primary w-100">
+                            </form>
+                        </div>
+                        {% endif%}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+</div>

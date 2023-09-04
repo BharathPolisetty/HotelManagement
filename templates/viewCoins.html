@@ -1,0 +1,25 @@
+{% include 'head.html'%}
+<br>
+<div class="container">
+    <div class="text-center h6 mt-3">View Coins</div>
+    <table class="table table-bordered">
+        <tr>
+            <th>Coin Name</th>
+            <th>Days</th>
+             <th>Points</th>
+             <th>Discount Price</th>
+
+
+        </tr>
+               {% for coin in coins%}
+
+        <tr>
+            <td>{{coin['coin_name']}}</td>
+            <td>{{coin['days']}}</td>
+             <td>{{coin['points']}}</td>
+              <td>$ {{coin['discount_price']}}</td>
+
+        </tr>
+      {% endfor %}
+    </table>
+</div>

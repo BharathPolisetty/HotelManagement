@@ -1,0 +1,22 @@
+{% include 'head.html'%}
+<br>
+<div class="container">
+    <div class="text-center h6 mt-3">View Payment</div>
+    <table class="table table-bordered">
+        <tr>
+            <th>Paid Amount</th>
+            <th>Total Amount</th>
+            <th>Transaction Date</th>
+
+
+        </tr>
+
+
+        <tr>
+            <td>$ {{payment['totalAmount']}}</td>
+              <td>$ {{payment['totalAmount']}}</td>
+            <td>{{payment['date'].strftime("%c")}}</td>
+
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,66 @@
+{% include 'head.html'%}
+<br>
+<script>
+function validate(){
+     let name = document.getElementById("name").value
+        if(name==""){
+            alert("Enter Name")
+            return false;
+        }
+        let email = document.getElementById("email").value
+        if(email==""){
+            alert("Enter Email")
+            return false;
+        }
+          let phone = document.getElementById("phone").value
+        if(phone.length!=10){
+            alert("Phone Number Should be 10")
+            return false
+        }
+          let password = document.getElementById("password").value
+        if(password==""){
+            alert("Enter Password")
+            return false;
+        }
+          let employee_type = document.getElementById("employee_type").value
+        if(employee_type==""){
+            alert("Employee Type")
+            return false;
+        }
+
+        return true
+    }
+</script>
+<div class="row mt-4">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <form action="addEmployee1" method="post" onsubmit="return validate()">
+            <div class="card p-3 mt-3">
+                <div class="h4 text-center">Add Employee</div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text"  class="form-control mt-1" name="name" id="name" placeholder="Enter  Name">
+                </div>
+                <div class="form-group mt-1">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email"  class="form-control mt-1" placeholder="Enter  Email">
+                </div>
+                <div class="form-group mt-1">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" name="phone" id="phone"  class="form-control mt-1" placeholder="Enter Phone Number">
+                </div>
+                <div class="form-group mt-1">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password"  class="form-control mt-1" placeholder="Enter Password">
+                </div>
+                 <div class="form-group mt-1">
+                    <label for="employee_type">Employee Type</label>
+                    <input type="text" name="employee_type" id="employee_type"  class="form-control mt-1" placeholder="Employee Type">
+                </div>
+
+
+                <input type="submit" value="Add Employee" class="btn btn-primary w-100 mt-3">
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+{% include 'head.html'%}
+<br>
+    <div class="row mt-5">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 " style="margin-top:-80px">
+            <form action="add_room_type1" method="post">
+                <div class="card p-3 mt-5">
+                    <div class="text-center h4">Add RoomType</div>
+                    <div class="form-group mt-1">
+                        <label for="room_type">Room Type</label>
+
+                        <input type="text" name="room_type" id="room_type" required class="form-control mt-2" placeholder="Enter Room Type" >
+                    </div>
+                    <input type="submit" value="Add Room Type" class="btn btn-primary btn-block mt-3">
+                </div>
+            </form>
+        </div>
+    </div>

@@ -1,0 +1,47 @@
+{% include 'head.html'%}
+<br>
+<div class="container">
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card mt-3 p-3">
+             <img src="static/customerProof/{{customer['idProof']}}" class="img-thumbnail" style="height:250px;width:100%;"></td>
+                <div class="text-center h5" style="font-size:15px">Name : <b>{{customer['name']}}</b></div>
+             <div class="text-center h5" style="font-size:15px">Phone : <b>{{customer['phone']}}</b></div>
+             <div class="text-center h5" style="font-size:15px">Email : <b>{{customer['email']}}</b></div>
+              <div class="text-center h5" style="font-size:15px">Points : <b>{{customer['points']}}</b></div>
+            <div class="text-end"><a href="editCustomer?customer_id={{customer['_id']}}" class="btn btn-primary">Edit</a> </div>
+            <div class=""><a href="viewClaims?customer_id={{customer['_id']}}" class="btn btn-primary">My Coins</a> </div>
+
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+      <div class="col-md-6">
+            <div class="text-center">Eligibility Of Coins</div>
+           <table class="table table-bordered mt-1">
+        <tr>
+            <th>Coin Name</th>
+            <th>Days</th>
+             <th>Points</th>
+             <th>Discount Price</th>
+             <th>Claim</th>
+
+
+        </tr>
+               {% for coin in coins2%}
+
+        <tr>
+            <td>{{coin['coin_name']}}</td>
+            <td>{{coin['days']}}</td>
+             <td>{{coin['points']}}</td>
+              <td>$ {{coin['discount_price']}}</td>
+            <td>
+                <a href="Claim_coin?coin_id={{coin['_id']}}&days={{coin['days']}}&customer_points={{customer['points']}}&points={{coin['points']}}" class="btn btn-warning">Claim Coin</a>
+            </td>
+
+        </tr>
+      {% endfor %}
+    </table>
+</div>
+      </div>
+</div>
+</div>

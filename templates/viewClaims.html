@@ -1,0 +1,24 @@
+{% include 'head.html'%}
+<br>
+<div class="container">
+    <div class="text-center h6 mt-3">My Coins</div>
+    <table class="table table-bordered">
+        <tr>
+            <th>Coin Name</th>
+             <th>Discount Price (%)</th>
+            <th>Remaining Available Days</th>
+
+
+        </tr>
+               {% for customer_coin in customer_coins%}
+                 {% set coin  = get_coin_by_customer_coin(customer_coin['coin_id'])%}
+
+        <tr>
+            <td>{{coin['coin_name']}}</td>
+              <td>$ {{coin['discount_price']}}</td>
+            <td>{{customer_coin['days']}}</td>
+
+        </tr>
+      {% endfor %}
+    </table>
+</div>

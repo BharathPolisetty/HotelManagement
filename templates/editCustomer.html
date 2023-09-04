@@ -1,0 +1,41 @@
+{% include 'head.html'%}
+<script>
+function validate(){
+          let phone = document.getElementById("phone").value
+        if(phone.length!=10){
+            alert("Phone Number Should be 10")
+            return false
+        }
+
+        return true
+    }
+</script>
+<div class="row mt-4">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <form action="editCustomer1" method="post" onsubmit="return validate()">
+          <input type="hidden" name="customer_id" value="{{customer_id}}">
+            <div class="card p-3 mt-3">
+                <div class="h4 text-center">Edit Profile</div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text"  class="form-control mt-1" name="name" id="name" value="{{customer['name']}}">
+                </div>
+                <div class="form-group mt-1">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email"  class="form-control mt-1" value="{{customer['email']}}">
+                </div>
+                <div class="form-group mt-1">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" name="phone" id="phone"  class="form-control mt-1" value="{{customer['phone']}}">
+                </div>
+                <div class="form-group mt-1">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password"  class="form-control mt-1" value="{{customer['password']}}">
+                </div>
+
+                <input type="submit" value="Update Profile" class="btn btn-primary w-100 mt-3">
+            </div>
+        </form>
+    </div>
+</div>

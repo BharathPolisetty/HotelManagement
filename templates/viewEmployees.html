@@ -1,0 +1,25 @@
+{% include 'head.html'%}
+<br><br>
+<div class="container">
+    <div class="text-center h6 mt-3">View  Employees</div>
+    <table class="table table-bordered">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+             <th>Phone</th>
+            <th>Employee Type</th>
+
+
+        </tr>
+               {% for employee in employees%}
+
+        <tr>
+            <td>{{employee['name']}}</td>
+            <td>{{employee['email']}}</td>
+             <td>{{employee['phone']}}</td>
+            <td>{{employee['employee_type']}}</td>
+
+        </tr>
+      {% endfor %}
+    </table>
+</div>

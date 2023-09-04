@@ -1,0 +1,27 @@
+{% include 'head.html'%}
+<br>
+<div class="row mt-4">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <form action="choose_coins1" method="post">
+            <input type="hidden" name="totalAmount" value="{{totalAmount}}">
+                 <input type="hidden" name="room_id" value="{{room_id}}">
+                  <input type="hidden" name="no_of_days" value="{{no_of_days}}">
+                  <input type="hidden" name="check_in" value="{{check_in}}">
+                  <input type="hidden" name="check_out" value="{{check_out}}">
+            <div class="card p-3 mt-3">
+                <div class="form-group mt-1">
+                    <div>Choose Coin to Grap Discount</div>
+                    <label for="coin_id">Coin Name</label>
+                    <select name="customer_coin_id" id="coin_id" class="form-control mt-1">
+                        {% for customer_coin in customer_coins2%}
+                        {% set coin = get_coin_by_customerCoinId(customer_coin['coin_id'])%}
+                        <option value="{{customer_coin['_id']}}">{{coin['coin_name']}}</option>
+                        {% endfor%}
+                    </select>
+                </div>
+                <input type="submit" value="Choose Coin" class="btn btn-primary w-100 mt-3">
+            </div>
+        </form>
+    </div>
+</div>

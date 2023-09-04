@@ -1,0 +1,64 @@
+{% include 'head.html'%}
+<script>
+function validate(){
+     let name = document.getElementById("name").value
+        if(name==""){
+            alert("Enter Name")
+            return false;
+        }
+        let email = document.getElementById("email").value
+        if(email==""){
+            alert("Enter Email")
+            return false;
+        }
+          let phone = document.getElementById("phone").value
+        if(phone.length!=10){
+            alert("Phone Number Should be 10")
+            return false
+        }
+          let password = document.getElementById("password").value
+        if(password==""){
+            alert("Enter Password")
+            return false;
+        }
+          let idProof = document.getElementById("idProof").value
+        if(idProof==""){
+            alert("Choose Proof")
+            return false;
+        }
+
+        return true
+    }
+</script>
+<div class="row mt-4">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <form action="bookRoom_for_customer1" method="post" enctype="multipart/form-data" onsubmit="return validate()">
+            <input type="hidden" name="room_id" value="{{room_id}}">
+            <input type="hidden" name="totalAmount" value="{{totalAmount}}">
+            <input type="hidden" name="no_of_days" value="{{no_of_days}}">
+             <input type="hidden" name="check_in" value="{{check_in}}">
+             <input type="hidden" name="check_out" value="{{check_out}}">
+            <div class="card p-3 mt-3">
+                <div class="h4 text-center">Customer Details</div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text"  class="form-control mt-1" name="name" id="name" placeholder="Enter  Name">
+                </div>
+                <div class="form-group mt-1">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email"  class="form-control mt-1" placeholder="Enter  Email">
+                </div>
+                <div class="form-group mt-1">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" name="phone" id="phone"  class="form-control mt-1" placeholder="Enter Phone Number">
+                </div>
+                <div class="form-group mt-1">
+                    <label for="idProof">Upload Proof</label>
+                    <input type="file" name="idProof" id="idProof"  class="form-control">
+                </div>
+                <input type="submit" value="Book" class="btn btn-primary w-100 mt-3">
+            </div>
+        </form>
+    </div>
+</div>

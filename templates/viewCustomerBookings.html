@@ -1,0 +1,93 @@
+{% include 'head.html'%}
+<br>
+<div class="text-center h6">View Bookings</div>
+<div class="container" >
+<div class="row mt-3">
+    {% for booking in bookings%}
+    {% set customer = get_customer_by_bookings(booking['customer_id'])%}
+    {% set room  = get_room_id_by_booking(booking['room_id'])%}
+        <div class="col-md-4">
+            <div class="card p-3 mt-3">
+            <img src="../static/Room/{{room['picture']}}" style="width:100px;width:100%">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="text-muted" style="font-size:10px;">Room Name</div>
+                    <div class="h6" style="font-size:13px;">{{room['room_name']}}</div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="text-muted"  style="font-size:10px">Check IN</div>
+                    <div class="h6" style="font-size:13px;">{{booking['check_in']}}</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-muted"  style="font-size:10px">Check Out</div>
+                    <div class="h6" style="font-size:13px;">{{booking['check_out']}}</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-muted"  style="font-size:10px">Number Of Days</div>
+                    <div class="h6" style="font-size:13px;">{{booking['no_of_days']}}</div>
+                </div>
+                  <div class="col-md-6">
+                    <div class="text-muted"  style="font-size:10px">Total Amount</div>
+                    <div class="h6" style="font-size:13px;">$ {{booking['totalAmount']}}</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-muted"  style="font-size:10px">Customer Name</div>
+                     <div class="h6" style="font-size:13px;"><b>{{customer['name']}} ({{customer['phone']}})</b></div>
+                </div>
+                {% if 'employee_id' in booking%}
+                {% set employee = get_employee_by_bookings(booking['employee_id'])%}
+                 <div class="col-md-6">
+                    <div class="text-muted"  style="font-size:10px">Employee Name</div>
+                     <div class="h6" style="font-size:13px;"><b>{{employee['name']}} ({{employee['phone']}})</b></div>
+                </div>
+                {% endif%}
+                 <div class="col-md-6">
+                    <div class="text-muted"  style="font-size:10px">Booking Status</div>
+                     <div class="h6" style="font-size:13px;"><b>{{booking['status']}}</b></div>
+                </div>
+            </div>
+                <div class="card-footer">
+                    <div class="row">
+                   {% if session['role'] =='customer'%}
+                     <div class="col-md-6">
+                        <form action="viewPayments" method="post">
+                            <input type="submit" value="View Payments" class="btn btn-primary">
+                            <input type="hidden" name="booking_id" value="{{booking['_id']}}">
+                        </form>
+                    </div>
+                    {% if booking['status'] =='Booked'%}
+                    <div class="col-md-6">
+                        <form action="cancelBooking" method="post">
+                            <input type="submit" value="Cancel Booking" class="btn btn-danger">
+                            <input type="hidden" name="booking_id" value="{{booking['_id']}}">
+                        </form>
+                    </div>
+                    {% endif%}
+                    {% endif%}
+                     </div>
+                      {% if session['role'] =='employee'%}
+                    {% if booking['status'] =='Booked'%}
+                    <div class="col-md-6">
+                        <form action="check_IN" method="post">
+                            <input type="submit" value="Check In" class="btn btn-primary w-100">
+                            <input type="hidden" name="booking_id" value="{{booking['_id']}}">
+                        </form>
+                    </div>
+                    {% endif%}
+                     {% if booking['status'] =='Checked In'%}
+                    <div class="col-md-6">
+                        <form action="check_out" method="post">
+                            <input type="submit" value="Check Out" class="btn btn-danger w-100">
+                            <input type="hidden" name="booking_id" value="{{booking['_id']}}">
+                            <input type="hidden" name="no_of_days" value="{{booking['no_of_days']}}">
+                        </form>
+                    </div>
+                    {% endif%}
+                    {% endif%}
+                </div>
+            </div>
+        </div>
+    {% endfor%}
+    </div>
+</div>

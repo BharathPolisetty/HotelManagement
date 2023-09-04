@@ -1,0 +1,37 @@
+{% include 'head.html'%}
+<br>
+    <div class="row mt-5">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 " style="margin-top:-80px">
+            <form action="addRooms1" method="post" enctype="multipart/form-data">
+                <div class="card p-3 mt-5">
+                    <div class="text-center h4">Add Room</div>
+                    <div class="form-group mt-1">
+                        <label>Room Number</label>
+                        <input type="text" name="room_number" id="room_number" placeHolder="Room Number" required class="form-control mt-1">
+                    </div>
+                    <div class="form-group mt-1">
+                        <label>Room Name</label>
+                        <input type="text" name="room_name" id="room_name" placeHolder="Room Name" required class="form-control mt-1">
+                    </div>
+                    <div class="form-group mt-1">
+                        <label>Price Per Day</label>
+                        <input type="number" name="price_per_day" id="price_per_day" placeHolder="Enter Price Per day" required class="form-control mt-1">
+                    </div>
+                    <div class="form-group mt-1">
+                        <label>Room Picture</label>
+                        <input type="file" name="picture" id="picture" required class="form-control mt-1">
+                    </div>
+                    <div class="form-group mt-1">
+                        <label for="room_type_id">Choose RoomType</label>
+                         <select name="room_type_id" id="room_type_id" required class="form-control mt-2">
+                             {%for room_type in room_types%}
+                            <option value="{{room_type['_id']}}">{{room_type['room_type']}}</option>
+                             {% endfor%}
+                        </select>
+                    </div>
+                    <input type="submit" value="Add Rooms" class="btn btn-primary btn-block mt-3">
+                </div>
+            </form>
+        </div>
+    </div>

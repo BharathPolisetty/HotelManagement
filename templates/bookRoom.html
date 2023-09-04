@@ -1,0 +1,52 @@
+{% include 'head.html'%}
+<br>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$(function(){
+    var dtToday = new Date();
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    var minDate= year + '-' + month + '-' + day;
+    $('#check_in').attr('min', minDate);
+}
+);
+$(function(){
+    var dtToday = new Date();
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    var minDate= year + '-' + month + '-' + day;
+    $('#check_out').attr('min', minDate);
+}
+);
+</script>
+<div class="row mt-5">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 " style="margin-top:-80px">
+        <form action="bookRoom1" method="post">
+            <input type="hidden" name="room_id" value="{{room_id}}">
+            <div class="card p-3 mt-5">
+                <div class="text-center h4"></div>
+                <div class="form-group mt-1">
+                    <label>Check In</label>
+                    <input type="date" name="check_in" id="check_in"  required class="form-control mt-1">
+                </div>
+                 <div class="form-group mt-1">
+                    <label>Check Out</label>
+                    <input type="date" name="check_out" id="check_out"  required class="form-control mt-1">
+                </div>
+                <input type="submit" value="Book Room" class="btn btn-primary btn-block mt-3">
+            </div>
+        </form>
+    </div>
+</div>

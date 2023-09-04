@@ -1,0 +1,67 @@
+{% include 'head.html'%}
+<br>
+<div class="container-fluid" >
+<div class="row mt-3">
+    <div class="col-md-2"></div>
+        <div class="col-md-4">
+            <div class="card p-3 mt-1">
+            <img src="../static/Room/{{room['picture']}}" style="width:100px;width:50%">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="text-muted" style="font-size:10px;">Room Name</div>
+                    <div class="h6" style="font-size:13px;">{{room['room_name']}}</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-muted " style="font-size:10px">Price Per Day</div>
+                    <div class="h6" style="font-size:13px;">$ {{room['price_per_day']}}</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-muted"  style="font-size:10px">Check IN</div>
+                    <div class="h6" style="font-size:13px;">{{check_in}}</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-muted"  style="font-size:10px">Check Out</div>
+                    <div class="h6" style="font-size:13px;">{{check_out}}</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-muted"  style="font-size:10px">Number Of Days</div>
+                    <div class="h6" style="font-size:13px;">{{no_of_days}}</div>
+                </div>
+                  <div class="col-md-6">
+                    <div class="text-muted"  style="font-size:10px">Total Amount</div>
+                    <div class="h6" style="font-size:13px;">$ {{totalAmount}}</div>
+                </div>
+            </div>
+                <div class="card-footer">
+                    {% if session['role'] =='employee'%}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form action="bookRoom_for_customer" method="post">
+                                <input type="hidden" name="room_id" value="{{room_id}}">
+                                <input type="hidden" name="totalAmount" value="{{totalAmount}}">
+                                <input type="hidden" name="no_of_days" value="{{no_of_days}}">
+                                 <input type="hidden" name="check_in" value="{{check_in}}">
+                                 <input type="hidden" name="check_out" value="{{check_out}}">
+                                <input type="submit" value="Pay & Book" class="btn btn-primary">
+                            </form>
+                        </div>
+                    </div>
+                    {% elif session['role'] =='customer'%}
+                     <div class="row">
+                        <div class="col-md-6">
+                            <form action="bookRoom2" method="post">
+                                <input type="hidden" name="room_id" value="{{room_id}}">
+                                <input type="hidden" name="totalAmount" value="{{totalAmount}}">
+                                <input type="hidden" name="no_of_days" value="{{no_of_days}}">
+                                 <input type="hidden" name="check_in" value="{{check_in}}">
+                                 <input type="hidden" name="check_out" value="{{check_out}}">
+                                <input type="submit" value="Pay & Book" class="btn btn-primary">
+                            </form>
+                        </div>
+                    </div>
+                    {% endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

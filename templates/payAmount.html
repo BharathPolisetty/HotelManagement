@@ -1,0 +1,80 @@
+{% include 'head.html'%}
+<br>
+<script>
+    function validate(){
+        let cardNumber = document.getElementById("cardNumber").value
+        if(cardNumber.length !=16){
+            alert("Card Number should be 16")
+            return false;
+        }
+        let cause = document.getElementById("cause").value
+        if(cause==""){
+            alert("Enter Cause")
+            return false;
+        }
+          let nameOnCard = document.getElementById("nameOnCard").value
+        if(nameOnCard==""){
+            alert("Enter NameOnCard")
+            return false;
+        }
+         let cvv = document.getElementById("cvv").value
+        if(cvv==""){
+            alert("Enter cvv")
+            return false;
+        }
+          let expireDate = document.getElementById("expireDate").value
+        if(expireDate==""){
+            alert("Enter ExpireDate")
+            return false;
+        }
+
+
+        return true
+    }
+</script>
+
+<div class="row">
+    <div class="col-md-4 mt-4"></div>
+    <div class="col-md-4">
+        <div class="card p-4">
+            {% if int(totalAmount) != int(totalAmount2): %}
+                <div class="row">
+                    <div class="col-md-6">Total Amount :</div><div class="col-md-6"> <b> $ {{totalAmount2}}</b></div>
+
+                    <div class="col-md-6">Discount Amount :</div><div class="col-md-6"> <b> $ {{int(totalAmount2)-int(totalAmount)}}</b></div>
+                </div>
+                    {% endif %}
+            <div class="row">
+                <div class="col-md-6">Payable Amount :</div><div class="col-md-6"> <b> $ {{totalAmount}}</b></div>
+            </div>
+              <form action="payAmount" method="post" onsubmit="return validate()">
+                <input type="hidden" name="totalAmount" value="{{totalAmount}}">
+                 <input type="hidden" name="room_id" value="{{room_id}}">
+                  <input type="hidden" name="no_of_days" value="{{no_of_days}}">
+                  <input type="hidden" name="check_in" value="{{check_in}}">
+                  <input type="hidden" name="check_out" value="{{check_out}}">
+                  <input type="hidden" name="customer_coin_id" value="{{customer_coin_id}}">
+                  <input type="hidden" name="discount_days" value="{{discount_days}}">
+                    <div class="mt">
+                        <label for="cardNumber">Card Number</label>
+                        <input type="number" name="cardNumber" id="cardNumber" placeholder="Enter Card Number" class="form-control mt-1" >
+                    </div>
+                    <div class="mt-1">
+                        <label for="nameOnCard">Name on Card</label>
+                        <input type="text" name="nameOnCard" id="nameOnCard" placeholder="Enter Name On Card" class="form-control mt-1" >
+                    </div>
+                    <div class="mt-1">
+                        <label for="nameOnCard">CVV</label>
+                        <input type="text" name="cvv" id="cvv" placeholder="Enter CVV" class="form-control mt-1" >
+                    </div>
+                    <div class="mt-1">
+                        <label for="expireDate">Expire Date</label>
+                        <input type="text" name="expireDate" id="expireDate" placeholder="MM/YY" class="form-control mt-1" >
+                    </div>
+                <div class="mt-2">
+                    <input type="submit" value="Book" class="btn btn-primary w-100" >
+                </div>
+              </form>
+        </div>
+    </div>
+</div>
